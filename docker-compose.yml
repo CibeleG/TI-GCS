@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  mongo:
+    image: 'mongo'
+    environment:
+      - MONGO_INITDB_DATABASE=test
+      - MONGO_INITDB_ROOT_USERNAME=lappis
+      - MONGO_INITDB_ROOT_PASSWORD=lappis
+      - log_statement=all
+      - MONGO_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - default
