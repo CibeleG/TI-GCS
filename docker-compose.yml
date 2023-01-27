@@ -3,6 +3,7 @@ version: '3.3'
 services:
   mongo:
     image: 'mongo'
+    container_name: mongo
     environment:
       - MONGO_INITDB_DATABASE=ti-db
       - MONGO_INITDB_ROOT_USERNAME=lappis
@@ -16,10 +17,11 @@ services:
       - "27017:27017"
     restart: always
     networks:
-      - default
+      - ti-network
 
   metabase:
     image: metabase/metabase
+    container_name: metabase
     ports:
       - "3002:3000"
     environment:
@@ -29,6 +31,20 @@ services:
     depends_on:
       - mongo
     restart: always
+    networks:
+      - ti-network
 
   lappis-python:
     build: .
+    ports: 
+      - "80:80"
+    volumes: 
+      - .:/src
+    depends_on:
+      - metabase
+      - mongo
+    networks:
+      - ti-network
+      
+networks:
+  ti-network:
