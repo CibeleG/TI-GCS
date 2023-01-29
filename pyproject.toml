@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "ti-gcs"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Cibele Goudinho <cibele.goudinho.ext@provu.com.br>"]
 readme = "README.md"
-packages = [{include = "requirements.txt"}]
+packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
 python101 = "3.8"
