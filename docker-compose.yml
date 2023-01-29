@@ -19,6 +19,21 @@ services:
     networks:
       - ti-network
 
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=lappis
+      - POSTGRES_PASSWORD=lappis
+      - POSTGRES_DB=ti-db
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5436:5432"
+    restart: always
+    networks:
+      - ti-network
+
   metabase:
     image: metabase/metabase
     container_name: metabase
